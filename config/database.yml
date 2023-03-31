@@ -11,10 +11,10 @@ default: &default
 
 development:
   <<: *default
-  database: postgres
+  database: project1
   host: localhost
   username: postgres
-  password: 5432
+  password: secretpassword
   port: 5432
   timeout: 5000
 

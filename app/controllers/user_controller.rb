@@ -13,6 +13,14 @@ class UserController < ApplicationController
   def show
   end
 
+  def login
+    # require the username and the password
+
+    @user = User.where(user_params)
+
+
+  end
+
   def index
     @user = User.all
     render json: @user
