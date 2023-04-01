@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'reimbursement/create'
+  post 'reimbursement/create'
   get 'reimbursement/index'
   get 'reimbursement/show'
   get 'reimbursement/delete'

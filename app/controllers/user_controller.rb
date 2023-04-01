@@ -1,3 +1,4 @@
+require_relative '../../lib/jwt_session'
 class UserController < ApplicationController
   def create
     # need to add checks to see if all the null fields are filled
@@ -17,8 +18,12 @@ class UserController < ApplicationController
     # require the username and the password
 
     @user = User.where(user_params)
-
-
+    if @user.length == 1
+      jwt = Jwt_Session.encode({user_id: @user[0].id, account_type: @user[0].account_type})
+      render status: 200, json: {message: "User logged in successfully", token: jwt}
+    else
+      render status: 400, json: {message: "Invalid"}
+    end
   end
 
   def index
