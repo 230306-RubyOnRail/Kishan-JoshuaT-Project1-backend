@@ -1,13 +1,13 @@
 # The secret must be a string
 require 'jwt'
 class Jwt_Session
-  @hmac_secret = 'my$ecretK3y'
+  @hmac_secret = Rails.application.credentials.dig(:secret_key_base)
   def self.encode(payload)
     token = JWT.encode payload, @hmac_secret, 'HS256'
   end
 
   def self.decode(token)
-    decoded_token = JWT.decode token, @hmac_secret, true, { algorithm: 'HS256' }
+    decoded_token = JWT.decode(token, @hmac_secret, true, { algorithm: 'HS256' })[0]
   end
 
 end

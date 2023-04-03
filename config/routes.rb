@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  post 'sessions/create'
+  get 'sessions/destroy'
+  post 'sessions/logged_in'
   post 'reimbursement/create'
   get 'reimbursement/index'
   get 'reimbursement/show'
