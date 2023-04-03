@@ -1,7 +1,6 @@
-require_relative '../../lib/json_web_token'
-
+require_relative './concerns/authentication_concern'
 class ReimbursementController < ApplicationController
-  before_action :add_auth_header_to_params
+  include Authentication_Concern
 
   def create
     # need to add checks to see if all the null fields are filled
@@ -10,11 +9,8 @@ class ReimbursementController < ApplicationController
     @reimbursement = Reimbursement.new(reimburse_params)
     # checks if the user_id in the reimbursement is the same as the user_id in the token
 
-    if !(@reimbursement.user_id = params[:authorization][0]["user_id"])
-      render status: 400, json: { message: "Invalid" }
-
       # if the reimbursement is valid, save it and return a success message
-    elsif @reimbursement.save
+    if @reimbursement.save
       render status: 200, json: { message: "Reimbursement request made successfully" }
       # if the reimbursement is not valid, return an error message
     else
@@ -29,6 +25,12 @@ class ReimbursementController < ApplicationController
   end
 
   def show
+    if params[:authorization][0][:account_type] == "manager"
+      reimbursements = Reimbursement.where(user_id: params[:id])
+      render status: 200, json: {message: reimbursements}
+    else
+      render status: 400, json: {message: "You are not authorized"}
+      end
   end
 
   def delete
@@ -42,17 +44,14 @@ class ReimbursementController < ApplicationController
   private
 
   def reimburse_params
+    params[:reimbursement][:user_id] = params[:authorization][0][:user_id]
     params.require(:reimbursement).permit(:description, :amount, :status, :user_id)
   end
 
   # adds the authorization header to the params
   # this is used to get the user_id from the token
   # this is used to check if the user_id in the reimbursement is the same as the user_id in the token
-  def add_auth_header_to_params
-    auth_header = request.headers["Authorization"].split(" ")
-    jwt = JsonWebToken.decode(auth_header[1]) if auth_header[0] == "Bearer"
-    params[:authorization] = jwt
-  end
+
 
   # def authorization
   #   token = request.env["HTTP_AUTHORIZATION"].split(" ")

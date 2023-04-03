@@ -4,7 +4,7 @@ require_relative '../../lib/json_web_token'
 class SessionsController < ApplicationController
 
   def create
-    master_key = Rails.application.credentials.dig(:secret_key_base)
+
     user = User.where(username: params["username"]).first # find the user by email
     if user&.authenticate(params["password"]) # check if the user exists and if the password entered is correct
       # if the user already has an active token, delete it
