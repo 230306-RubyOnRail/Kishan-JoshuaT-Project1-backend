@@ -1,4 +1,4 @@
-require_relative '../../lib/jwt_session'
+require_relative '../../lib/json_web_token'
 class UserController < ApplicationController
   def create
     # need to add checks to see if all the null fields are filled
