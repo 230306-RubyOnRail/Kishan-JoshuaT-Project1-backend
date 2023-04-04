@@ -1,5 +1,6 @@
 require_relative '../../lib/json_web_token'
 class UserController < ApplicationController
+  include Authentication_Concern
   def create
     # need to add checks to see if all the null fields are filled
     @user = User.new(user_params)

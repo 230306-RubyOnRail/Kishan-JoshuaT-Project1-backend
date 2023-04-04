@@ -34,9 +34,30 @@ class ReimbursementController < ApplicationController
   end
 
   def delete
+    reimbursement = Reimbursement.find(params[:id])
+    if params[:authorization][0][:account_type] == "manager"
+      reimbursement.destroy if reimbursement != nil
+      render status: 200, json: {message: "Reimbursement request deleted successfully"}
+    elsif params[:authorization][0][:account_type] == "employee" && params[:authorization][0][:user_id] == reimbursement.user_id
+      reimbursement.destroy if reimbursement != nil
+      render status: 200, json: {message: "Reimbursement request deleted successfully"}
+    else
+      render status: 400, json: {message: "You are not authorized"}
+    end
   end
 
   def update
+    reimbursement = Reimbursement.find(params[:id])
+    if params[:authorization][0][:account_type] == "manager"
+      reimbursement.update(reimburse_params)
+      render status: 200, json: {message: "Reimbursement request updated successfully"}
+    elsif params[:authorization][0][:account_type] == "employee" && params[:authorization][0][:user_id] == reimbursement.user_id
+      reimburse_params[:user_id] = params[:authorization][0][:user_id] # to force the user_id to be the same as the token
+      reimbursement.update(reimburse_params)
+      render status: 200, json: {message: "Reimbursement request updated successfully"}
+    else
+      render status: 400, json: {message: "You are not authorized"}
+    end
   end
 
   # returns the reimbursement params that are allowed to be passed in

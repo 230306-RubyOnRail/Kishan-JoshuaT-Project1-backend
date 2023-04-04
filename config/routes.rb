@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   post 'reimbursement/create'
   get 'reimbursement/index'
   get 'reimbursement/show/:id', to: 'reimbursement#show'
-  get 'reimbursement/delete'
+  delete 'reimbursement/delete/:id', to: 'reimbursement#delete'
   put 'reimbursement/update/:id', to: 'reimbursement#update'
   post 'user/create'
   get 'user/show'
