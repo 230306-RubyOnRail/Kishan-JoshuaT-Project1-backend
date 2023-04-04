@@ -20,21 +20,34 @@ class ReimbursementController < ApplicationController
   end
 
   def index
-    @reimbursement = Reimbursement.all
-    render json: @reimbursement
+    if params[:authorization][0][:account_type] == "manager"
+      @reimbursement = Reimbursement.all
+      render json: @reimbursement
+    elsif params[:authorization][0][:account_type] == "employee"
+      @reimbursement = Reimbursement.where(user_id: params[:authorization][0][:user_id])
+      render json: @reimbursement
+    else
+      render status: 400, json: {message: "You are not authorized"}
+    end
   end
 
   def show
     if params[:authorization][0][:account_type] == "manager"
       reimbursements = Reimbursement.where(user_id: params[:id])
       render status: 200, json: {message: reimbursements}
+    elsif params[:authorization][0][:account_type] == "employee" && params[:authorization][0][:user_id] == params[:id]
+      @reimbursement = Reimbursement.where(user_id: params[:authorization][0][:user_id])
+      render json: @reimbursement
     else
       render status: 400, json: {message: "You are not authorized"}
       end
   end
 
   def delete
-    reimbursement = Reimbursement.find(params[:id])
+    begin reimbursement = Reimbursement.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      render status: 400, json: {message: "Reimbursement request not found"}
+    end
     if params[:authorization][0][:account_type] == "manager"
       reimbursement.destroy if reimbursement != nil
       render status: 200, json: {message: "Reimbursement request deleted successfully"}
@@ -47,7 +60,11 @@ class ReimbursementController < ApplicationController
   end
 
   def update
-    reimbursement = Reimbursement.find(params[:id])
+    begin reimbursement = Reimbursement.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      render status: 400, json: {message: "Reimbursement request not found"}
+    end
+
     if params[:authorization][0][:account_type] == "manager"
       reimbursement.update(reimburse_params)
       render status: 200, json: {message: "Reimbursement request updated successfully"}
