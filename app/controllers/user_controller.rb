@@ -3,13 +3,17 @@ require_relative './concerns/authentication_concern'
 class UserController < ApplicationController
   include Authentication_Concern
   def create
-    # need to add checks to see if all the null fields are filled
-    @user = User.new(user_params)
-    # @user.user_id = 1
-    if @user.save
-      render status: 200, json: {message: "User created successfully"}
+    if params[:authorization][0][:account_type] == "manager"
+      # need to add checks to see if all the null fields are filled
+      @user = User.new(user_params)
+      # @user.user_id = 1
+      if @user.save
+        render status: 200, json: {message: "User created successfully"}
+      else
+        render status: 400, json: {message: "Invalid"}
+      end
     else
-      render status: 400, json: {message: "Invalid"}
+      render status: 400, json: {message: "You are not authorized"}
     end
   end
 

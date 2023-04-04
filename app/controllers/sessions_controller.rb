@@ -32,7 +32,7 @@ class SessionsController < ApplicationController
     ##### should add a check to see if the token is already deleted
   end
 
-  def logged_in
-  end
+  # def logged_in
+  # end
 
 end
