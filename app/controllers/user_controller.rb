@@ -1,4 +1,5 @@
 require_relative '../../lib/json_web_token'
+require_relative './concerns/authentication_concern'
 class UserController < ApplicationController
   include Authentication_Concern
   def create
