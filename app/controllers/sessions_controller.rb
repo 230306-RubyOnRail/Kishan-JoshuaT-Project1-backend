@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
       random = SecureRandom.hex(32)
       token_value = JsonWebToken.encode({user_id: user.id, account_type: user.account_type, random: random})
       token = Token.create(token: token_value, user_id: user.id) # create a new token and save it to the database
-      render status: 200, json: {message: "User logged in successfully", token: token.token}
+      render status: 200, json: {message: "User logged in successfully", token: token.token, user_id: user.id, username: user.username, account_type: user.account_type}
     else
       render status: 401, json: {message: "Invalid email"}
     end
