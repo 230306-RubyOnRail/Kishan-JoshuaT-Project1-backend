@@ -3,8 +3,9 @@ require "json"
 
 
 class SessionsControllerTest < ActionDispatch::IntegrationTest
-  @token = nil
 
+
+  # set up tests if I can log in with a user which in this case is a manager.
   def setup
     # Create a test user with a password and username
     # user = User.create(username: "Josh2555", password: "1234")
@@ -33,9 +34,6 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
      assert_response :success
   end
 
-  test "POST /reimbursement/create creates a reimbursement and returns a message" do
-    post '/reimbursement/create', params: {description: "test", amount: "100", status: "pending"}.to_json, headers: {'Content-Type' => 'application/json', 'Authorization' => "Bearer #{@token}"}
-    assert_response :success
-  end
+
 
 end

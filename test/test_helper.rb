@@ -2,8 +2,14 @@ ENV["RAILS_ENV"] ||= "test"
 require_relative "../config/environment"
 require "rails/test_help"
 require "simplecov"
+require "faker"
+require "factory_bot_rails"
+
 
 class ActiveSupport::TestCase
+  include FactoryBot::Syntax::Methods
+
+
   # Run tests in parallel with specified workers
   parallelize(workers: :number_of_processors, with: :threads)
   SimpleCov.start do
