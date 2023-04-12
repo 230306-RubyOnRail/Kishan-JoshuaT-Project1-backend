@@ -34,7 +34,7 @@ class ReimbursementController < ApplicationController
   def show
     if params[:authorization][0][:account_type] == "manager"
       reimbursements = Reimbursement.where(user_id: params[:id])
-      render status: 200, json: {message: reimbursements}
+      render status: 200, json: reimbursements
     elsif params[:authorization][0][:account_type] == "employee" && params[:authorization][0][:user_id] == params[:id]
       @reimbursement = Reimbursement.where(user_id: params[:authorization][0][:user_id])
       render json: @reimbursement
@@ -70,6 +70,7 @@ class ReimbursementController < ApplicationController
       render status: 200, json: {message: "Reimbursement request updated successfully"}
     elsif params[:authorization][0][:account_type] == "employee" && params[:authorization][0][:user_id] == reimbursement.user_id
       reimburse_params[:user_id] = params[:authorization][0][:user_id] # to force the user_id to be the same as the token
+      reimburse_params[:status] = "pending" # to force the status to be pending
       reimbursement.update(reimburse_params)
       render status: 200, json: {message: "Reimbursement request updated successfully"}
     else
