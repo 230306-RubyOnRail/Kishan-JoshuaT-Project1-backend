@@ -1,0 +1,13 @@
+user2:
+  username: "Josh"
+  name: "Joshua"
+  password: "1234"
+  account_type: "manager"
+  id: 1
+
+user1:
+  name: "User 1"
+  username: "user1"
+  password: '3232'
+  account_type: "employee"
+  id: 2

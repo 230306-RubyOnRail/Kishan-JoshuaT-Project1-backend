@@ -1,11 +1,9 @@
 require "test_helper"
-require "json"
 
+class UserControllerTest < ActionDispatch::IntegrationTest
+  # test "the truth" do
+  #   assert true
 
-class SessionsControllerTest < ActionDispatch::IntegrationTest
-
-
-  # set up tests if I can log in with a user which in this case is a manager.
   def setup
     # Create a test user with a password and username
     # user = User.create(username: "Josh2555", password: "1234")
@@ -34,6 +32,9 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-
-
+  # end
+  test "Create a user" do
+    post '/user/create', params: {username: "Test3", password: "1234", account_type: "employee", name: "Test3"}.to_json, headers: {'Content-Type' => 'application/json', 'Authorization' => "Bearer #{@token}"}
+    assert_response :success
+  end
 end

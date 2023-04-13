@@ -2,6 +2,9 @@ require_relative '../../lib/json_web_token'
 require_relative './concerns/authentication_concern'
 class UserController < ApplicationController
   include Authentication_Concern
+
+
+  # creates a new user
   def create
     if params[:authorization][0][:account_type] == "manager"
       # need to add checks to see if all the null fields are filled
@@ -17,8 +20,9 @@ class UserController < ApplicationController
     end
   end
 
-  def show
-  end
+  # # returns a specific user
+  # def show
+  # end
 
   # def login
   #   # require the username and the password
@@ -32,6 +36,9 @@ class UserController < ApplicationController
   #   end
   # end
 
+  # returns all users
+  # if manager return all users
+  # if employee return only the user
   def index
     if params[:authorization][0][:account_type] == "manager"
       @user = User.all
@@ -48,6 +55,16 @@ class UserController < ApplicationController
   end
 
   private
+  # strong params
+  # only allow the following params to be passed through
+  # this is to prevent malicious users from passing in extra params
+  # that we don't want
+  # this is also to prevent users from passing in params that we don't
+  # want them to change
+  # for example, we don't want users to be able to change their user_id
+  # or their account_type
+  # we only want them to be able to change their name, username, and password
+  # so we only allow those params to be passed through
   def user_params
     params.require(:user).permit(:name, :username, :password, :account_type)
   end

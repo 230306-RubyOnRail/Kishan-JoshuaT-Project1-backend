@@ -3,6 +3,7 @@ require_relative '../../lib/json_web_token'
 
 class SessionsController < ApplicationController
 
+  # create a new session
   def create
 
     user = User.where(username: params["username"]).first # find the user by email
@@ -20,7 +21,7 @@ class SessionsController < ApplicationController
       render status: 401, json: {message: "Invalid email"}
     end
   end
-
+  # destroy a session but does not used inside of the app
   def destroy
     # Authorization: Bearer <token>
     # ["Authorization", "Bearer", "token"]
