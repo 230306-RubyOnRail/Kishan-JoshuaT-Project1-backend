@@ -31,7 +31,7 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     # get "/some/other/endpoint", headers: { 'Authorization' => "Bearer #{token}" }
 
     # Check that the response to the authenticated request is successful
-     assert_response :success
+    assert_response :success
   end
 
 

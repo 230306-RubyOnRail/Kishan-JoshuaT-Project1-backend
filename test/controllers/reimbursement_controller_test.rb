@@ -1,6 +1,8 @@
-require "test_helper"
-require "faker"
-require "minitest/mock"
+# frozen_string_literal: true
+
+require 'test_helper'
+require 'faker'
+require 'minitest/mock'
 
 
 class ReimbursementControllerTest < ActionDispatch::IntegrationTest
@@ -12,7 +14,7 @@ class ReimbursementControllerTest < ActionDispatch::IntegrationTest
 
     headers = { 'Content-Type' => 'application/json' }
     # Send a POST request to the /sessions/create endpoint with a JSON request body
-    post '/sessions/create', params: {username: "Josh", password: "1234"}.to_json, headers: headers
+    post '/sessions/create', params: {username: 'Josh', password: '1234'}.to_json, headers: headers
 
     # Check that the response is successful
     assert_response :success
@@ -21,7 +23,7 @@ class ReimbursementControllerTest < ActionDispatch::IntegrationTest
     response_body = JSON.parse(response.body)
 
     # Check that the response contains a token
-    assert_not_nil response_body['token'], "Response did not contain a token"
+    assert_not_nil response_body['token'], 'Response did not contain a token'
 
     # Store the token for use in subsequent requests
     @token = response_body['token']
@@ -46,26 +48,26 @@ class ReimbursementControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "GET /reimbursement/all returns all reimbursements" do
-    reimbursement1 = create(:reimbursement, id: 1, description: "test 1", amount: Faker::Number.number, status: "pending", created_at: Faker::Date, updated_at: Faker::Date, user_id: 1)
-    reimbursement2 = create(:reimbursement, id: 2, description: "test 2", amount: Faker::Number.number, status: "pending", created_at: Faker::Date, updated_at: Faker::Date, user_id: 1)
+  test 'GET /reimbursement/all returns all reimbursements' do
+    reimbursement1 = create(:reimbursement, id: 1, description: 'test 1', amount: Faker::Number.number, status: 'pending', created_at: Faker::Date, updated_at: Faker::Date, user_id: 1)
+    reimbursement2 = create(:reimbursement, id: 2, description: 'test 2', amount: Faker::Number.number, status: 'pending', created_at: Faker::Date, updated_at: Faker::Date, user_id: 1)
 
-    reimbursementmock = MiniTest::Mock.new
-    reimbursementmock.expect :all, [reimbursement1, reimbursement2]
+    reimbursementMock = MiniTest::Mock.new
+    reimbursementMock.expect :all, [reimbursement1, reimbursement2]
     original_all_method = Reimbursement.method(:all)
     Reimbursement.define_singleton_method(:all) do |*args|
-      reimbursementmock.all(*args)
+      reimbursementMock.all(*args)
     end
     # Make a GET request to the index action
-    get "/reimbursement/index", headers: { 'Authorization' => "Bearer #{@token}" }
+    get '/reimbursement/index', headers: { 'Authorization' => "Bearer #{@token}" }
 
     # Assert that the response contains the reimbursement names
     assert_response :success
-    assert_includes response.body, "test 1"
-    assert_includes response.body, "test 2"
+    assert_includes response.body, 'test 1'
+    assert_includes response.body, 'test 2'
 
     # Verify that the mock was called
-    reimbursementmock.verify
+    reimbursementMock.verify
 
     # Restore the original implementation of `all`
     Reimbursement.define_singleton_method(:all, &original_all_method)
@@ -92,8 +94,8 @@ class ReimbursementControllerTest < ActionDispatch::IntegrationTest
   #   end
   # end
 
-  test "POST /reimbursement/create creates a reimbursement and returns a message" do
-    post '/reimbursement/create', params: {description: "test", amount: "100", status: "pending"}.to_json, headers: {'Content-Type' => 'application/json', 'Authorization' => "Bearer #{@token}"}
+  test 'POST /reimbursement/create creates a reimbursement and returns a message' do
+    post '/reimbursement/create', params: {description: 'test', amount: '100', status: 'pending'}.to_json, headers: {'Content-Type' => 'application/json', 'Authorization' => "Bearer #{@token}"}
     assert_response :success
   end
 
