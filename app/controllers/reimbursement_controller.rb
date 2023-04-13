@@ -2,6 +2,8 @@ require_relative './concerns/authentication_concern'
 class ReimbursementController < ApplicationController
   include Authentication_Concern
 
+  # create a reimbursement
+  #
   def create
     # need to add checks to see if all the null fields are filled
 
@@ -19,6 +21,7 @@ class ReimbursementController < ApplicationController
 
   end
 
+  # returns all reimbursements
   def index
     if params[:authorization][0][:account_type] == "manager"
       @reimbursement = Reimbursement.all
@@ -31,6 +34,8 @@ class ReimbursementController < ApplicationController
     end
   end
 
+
+  # returns a specific reimbursement
   def show
     if params[:authorization][0][:account_type] == "manager"
       reimbursements = Reimbursement.where(user_id: params[:id])
@@ -43,6 +48,7 @@ class ReimbursementController < ApplicationController
       end
   end
 
+  # deletes a reimbursement
   def delete
     begin reimbursement = Reimbursement.find(params[:id])
     rescue ActiveRecord::RecordNotFound
@@ -59,6 +65,7 @@ class ReimbursementController < ApplicationController
     end
   end
 
+  # updates a reimbursement
   def update
     begin reimbursement = Reimbursement.find(params[:id])
     rescue ActiveRecord::RecordNotFound
@@ -81,7 +88,10 @@ class ReimbursementController < ApplicationController
   # returns the reimbursement params that are allowed to be passed in
 
   private
-
+  # returns the reimbursement params that are allowed to be passed in
+  # this is used to create a reimbursement
+  # this is used to update a reimbursement
+  # this is used to check if the user_id in the reimbursement is the same as the user_id in the token
   def reimburse_params
     params[:reimbursement][:user_id] = params[:authorization][0][:user_id]
     params.require(:reimbursement).permit(:description, :amount, :status, :user_id)
