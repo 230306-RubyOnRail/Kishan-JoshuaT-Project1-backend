@@ -100,7 +100,9 @@ class ReimbursementControllerTest < ActionDispatch::IntegrationTest
 
 
 
-  test "PUT /reimbursement/update updates a reimbursement and returns a message" do
-    # post '/reimbursement/update'
-  end
+  # test "PUT /reimbursement/update updates a reimbursement and returns a message" do
+  #   put '/reimbursement/update/1', params: {description: "test", status: "approved"}.to_json, headers: {'Content-Type' => 'application/json', 'Authorization' => "Bearer #{@token}"}
+  #   assert_response :success
+  #   # post '/reimbursement/update'
+  # end
 end
