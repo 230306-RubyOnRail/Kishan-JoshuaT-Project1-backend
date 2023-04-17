@@ -1,0 +1,31 @@
+services:
+  db:
+    image: postgres
+    environment:
+        POSTGRES_PASSWORD: superpassword
+        PGDATA: /var/lib/postgresql/data/pgdata
+    ports:
+        - "5432:5432"
+    volumes:
+        - ./pgdata:/var/lib/postgresql/data/pgdata
+
+    networks:
+      - ruby_project
+    web:
+      image: test_build
+      environment:
+        DB:HOST: db
+        DB_PASSWORD: superpassword
+        DB_NAME: postgres
+        RAILS_ENV: development
+      depends_on:
+        - db
+      ports:
+        - "3000:3000"
+      networks:
+        - ruby_project
+      command: sh -c "bundle exec rails db:migrate && bundle exec rails s -p 3000 -b 0.0.0."
+networks:
+  ruby_project:
+volumes:
+  pg_data:

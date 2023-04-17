@@ -12,9 +12,9 @@ default: &default
 development:
   <<: *default
   database: project1
-  host: localhost
+  host: <%= ENV['DATABASE_HOST'] %>
   username: postgres
-  password: secretpassword
+  password: <%= ENV['DATABASE_PASSWORD'] %>
   port: 5432
   timeout: 5000
 
