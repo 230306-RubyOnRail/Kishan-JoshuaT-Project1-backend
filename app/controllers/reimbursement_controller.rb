@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require_relative './concerns/authentication_concern'
 class ReimbursementController < ApplicationController
   include Authentication_Concern
@@ -9,9 +10,9 @@ class ReimbursementController < ApplicationController
 
     # makes new reimbursement
     @reimbursement = Reimbursement.new(reimburse_params)
-    # checks if the user_id in the reimbursement is the same as the user_id in the token
 
-      # if the reimbursement is valid, save it and return a success message
+    # checks if the user_id in the reimbursement is the same as the user_id in the token
+    # if the reimbursement is valid, save it and return a success message
     if @reimbursement.save
       render status: 200, json: { message: "Reimbursement request made successfully" }
       # if the reimbursement is not valid, return an error message
@@ -33,7 +34,6 @@ class ReimbursementController < ApplicationController
       render status: 400, json: {message: "You are not authorized"}
     end
   end
-
 
   # returns a specific reimbursement
   def show
@@ -88,6 +88,7 @@ class ReimbursementController < ApplicationController
   # returns the reimbursement params that are allowed to be passed in
 
   private
+
   # returns the reimbursement params that are allowed to be passed in
   # this is used to create a reimbursement
   # this is used to update a reimbursement
