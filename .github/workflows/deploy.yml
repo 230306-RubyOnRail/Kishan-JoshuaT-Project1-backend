@@ -23,7 +23,7 @@ jobs:
         touch password.pem
         echo "${{ secrets.SECRET_KEY_PAIR }}" >> password.pem
         chmod 400 password.pem
-        ssh -i password.pem -t -t -o StrictHostKeyChecking=no ${{ secrets.EC2_NAME }}@{{ secrets.EC2_ADDRESS }} << 'EOF'
+        ssh -i "password.pem" -t -t -o StrictHostKeyChecking=no ${{ secrets.EC2_NAME }}@{{ secrets.EC2_ADDRESS }} << 'EOF'
         cd ./backend
         docker stop ruby_backend
         docker rm ruby_backend
