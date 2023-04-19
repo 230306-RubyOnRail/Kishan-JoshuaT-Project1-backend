@@ -11,7 +11,7 @@ default: &default
 
 development:
   <<: *default
-  database: project1
+  database: postgres
   host: <%= ENV['DATABASE_HOST'] %>
   username: postgres
   password: <%= ENV['DATABASE_PASSWORD'] %>
