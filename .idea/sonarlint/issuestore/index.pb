@@ -3,8 +3,6 @@
 Gemfile.lock,2\1\21fb5836b499a2be648386aac055d2e069160d6c
 [
 +app/controllers/reimbursement_controller.rb,d\0\d0483ba03e7d2c927f36da893627063907ae87e6
-\
-,test/controllers/sessions_controller_test.rb,a\3\a32dd722391165ba626a16d828bf81866dc3f66e
 V
 &app/controllers/sessions_controller.rb,a\7\a7c8e5306369685dc160701bbafa8a14286fd15b
 7
