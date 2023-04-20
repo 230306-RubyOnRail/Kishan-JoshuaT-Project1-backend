@@ -10,9 +10,9 @@ class JsonWebToken
     # decoded_token = JWT.decode(token, @hmac_secret, true, { algorithm: 'HS256' })[0]
     JWT.decode(token, @hmac_secret, true, {algorithm: 'HS256'})
   rescue JWT::ExpiredSignature, JWT::VerificationError => e
-    raise ExceptionHandler::ExpiredSignature, e.message
+    raise JWT::ExpiredSignature, e.message
   rescue JWT::DecodeError, JWT::VerificationError => e
-    raise ExceptionHandler::DecodeError, e.message
+    raise JWT::DecodeError, e.message
   end
 end
 
