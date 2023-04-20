@@ -1,0 +1,27 @@
+name: Upload to s3
+
+on:
+  push:
+    branches: [ main ]
+    
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: Docker the Backend on EC2
+      run: |
+        touch password.pem
+        echo "${{ secrets.SECRET_KEY_PAIR }}" >> password.pem
+        chmod 400 password.pem
+        ssh -i password.pem -t -t -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_ADDRESS }} << 'EOF'
+        sudo chmod 666 /var/run/docker.sock
+        docker rm -f $(docker ps -a -q)
+        docker rmi -f $(docker images -a -q)
+        docker pull joshet/ruby_backend
+        docker run -d -p 3000:3000 -e DATABASE_PASSWORD=secretpassword -e DATABASE_HOST=ruby-on-rails-230306.c21epmfqzrpf.us-east-2.rds.amazonaws.com --network ruby_project joshet/ruby_backend
+        screen -d -m
+        exit
+        EOF
+
+  

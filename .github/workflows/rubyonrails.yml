@@ -49,9 +49,8 @@ jobs:
           DISABLE_SPRING: 1
         run: |
           bundle exec rails db:prepare
-          bundle exec rake test
 
-      - name: Build and test with rspec
+      - name: Build and test
         env:
           PG_DATABASE: test
           PG_HOST: localhost
@@ -59,7 +58,7 @@ jobs:
           PG_PASSWORD: secretpassword
           RAILS_ENV: test
         run: |
-          bundle exec rails test
+          bundle exec rake
 
       - name: Create Coverage Artifact
         uses: actions/upload-artifact@v2
