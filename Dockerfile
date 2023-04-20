@@ -25,4 +25,4 @@ EXPOSE 3000
 ENV RAILS_ENV=development
 
 # Run the command
-# CMD ["bundle","exec","rails", "server", "-b", "0.0.0.0", "-p", "3000"]
+CMD ["bundle","exec","rails", "server", "-b", "0.0.0.0", "-p", "3000"]
