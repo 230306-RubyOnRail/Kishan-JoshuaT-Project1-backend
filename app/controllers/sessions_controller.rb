@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-require 'jwt'
+
 require_relative '../../lib/json_web_token'
 
 class SessionsController < ApplicationController

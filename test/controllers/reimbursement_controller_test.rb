@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require 'test_helper'
-require 'faker'
+
+
 require 'minitest/mock'
 
 

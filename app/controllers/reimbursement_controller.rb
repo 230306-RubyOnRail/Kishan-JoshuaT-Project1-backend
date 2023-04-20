@@ -1,7 +1,7 @@
 # frozen_string_literal: true
-require_relative './concerns/authentication_concern'
+require_relative './concerns/thentication_concern'
 class ReimbursementController < ApplicationController
-  include Authentication_Concern
+  include AuthenticationConcern
 
   # create a reimbursement
   #
