@@ -24,7 +24,7 @@ jobs:
         echo "${{ secrets.SECRET_KEY_PAIR }}" >> password.pem
         chmod 400 password.pem
         ssh -i password.pem -t -t -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_ADDRESS }} << 'EOF'
-        aws s3 sync s3://rubyonrails04172023//backend/ ./backend --delete
+        aws s3 sync s3://rubyonrails04172023//backend/ ./backend --delete --no-follow-symlinks --no-progress
         cd ./backend/
         sudo chmod 666 /var/run/docker.sock
         docker rm -f $(docker ps -a -q)
