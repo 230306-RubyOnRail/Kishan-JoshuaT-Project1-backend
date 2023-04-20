@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 require_relative '../../lib/json_web_token'
-require_relative './concerns/thentication_concern'
+
 class UserController < ApplicationController
   include AuthenticationConcern
 

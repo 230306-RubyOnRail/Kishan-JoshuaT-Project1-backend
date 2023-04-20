@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-require_relative './concerns/thentication_concern'
+
 class ReimbursementController < ApplicationController
   include AuthenticationConcern
 
