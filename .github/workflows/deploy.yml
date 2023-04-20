@@ -20,7 +20,7 @@ jobs:
         echo "${{ secrets.SECRET_KEY_PAIR }}" >> password.pem
         chmod 400 password.pem
         ssh -i password.pem -t -t -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_ADDRESS }} << 'EOF'
-        docker rm ruby_backend
+        docker rm -f ruby_backend
         docker rmi ${{ secrets.DOCKERNAME }}/ruby_backend
         docker pull ${{ secrets.DOCKERNAME }}/ruby_backend
         docker run -d -p 3000:3000 -e DATABASE_PASSWORD=secretpassword -e DATABASE_HOST=ruby-on-rails-230306.c21epmfqzrpf.us-east-2.rds.amazonaws.com --network ruby_project joshet/ruby_backend
