@@ -25,11 +25,11 @@ jobs:
         chmod 400 password.pem
         ssh -i password.pem -t -t -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_ADDRESS }} << 'EOF'
         cd ./backend/
-        sudo docker stop ruby_backend
-        sudo docker rm ruby_backend
-        sudo docker image rm ruby_backend
-        sudo docker build -t ruby_backend .
-        sudo docker run -d -p 3000:3000 --name ruby_backend --network ruby_project ruby_backend
+        sudo chmod 666 /var/run/docker.sock
+        docker rm ruby_backend
+        docker image rm ruby_backend
+        docker build -t ruby_backend .
+        docker run -d -p 3000:3000 --name ruby_backend --network ruby_project ruby_backend
         exit
         EOF
   
