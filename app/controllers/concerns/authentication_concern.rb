@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 require_relative '../../../lib/json_web_token'
-module Authentication_Concern
+module AuthenticationConcern
   extend ActiveSupport::Concern
 
   included do

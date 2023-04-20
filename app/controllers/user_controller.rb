@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 require_relative '../../lib/json_web_token'
-require_relative './concerns/authentication_concern'
+require_relative './concerns/thentication_concern'
 class UserController < ApplicationController
-  include Authentication_Concern
+  include AuthenticationConcern
 
 
   # creates a new user
