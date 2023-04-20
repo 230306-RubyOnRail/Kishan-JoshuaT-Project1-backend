@@ -24,12 +24,14 @@ jobs:
         echo "${{ secrets.SECRET_KEY_PAIR }}" >> password.pem
         chmod 400 password.pem
         ssh -i password.pem -t -t -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_ADDRESS }} << 'EOF'
+        aws s3 sync s3://rubyonrails04172023//backend/ ./backend
         cd ./backend/
         sudo chmod 666 /var/run/docker.sock
-        docker rm ruby_backend
-        docker image rm ruby_backend
+        docker rm -f $(docker ps -a -q)
+        docker rmi -f $(docker images -a -q)
         docker build -t ruby_backend .
-        docker run -d -p 3000:3000 --name ruby_backend --network ruby_project ruby_backend
+        cd ./frontend
+        docker build -t ruby_frontend .
         exit
         EOF
   
