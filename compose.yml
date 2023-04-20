@@ -3,9 +3,9 @@ services:
   web:
     image: ruby_backend
     environment:
-      DATABASE_HOST: db
+      DATABASE_HOST: ruby-on-rails-230306.c21epmfqzrpf.us-east-2.rds.amazonaws.com
       DATABASE_PASSWORD: secretpassword
-      DB_NAME: project1
+      DB_NAME: postgres
       RAILS_ENV: development
     stop_grace_period: 30s
     depends_on:
