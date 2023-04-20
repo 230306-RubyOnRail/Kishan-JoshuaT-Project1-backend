@@ -13,7 +13,8 @@ class ActiveSupport::TestCase
   # Run tests in parallel with specified workers
   parallelize(workers: :number_of_processors, with: :threads)
   SimpleCov.start do
-    add_filter "/test/"
+    add_filter '/test/'
+    track_files 'app/**/**/*.rb'
   end
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
   fixtures :all
