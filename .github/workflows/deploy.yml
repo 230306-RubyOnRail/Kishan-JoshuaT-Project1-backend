@@ -29,9 +29,9 @@ jobs:
         sudo chmod 666 /var/run/docker.sock
         docker rm -f $(docker ps -a -q)
         docker rmi -f $(docker images -a -q)
-        docker build -t ruby_backend .
-        cd ./frontend
-        docker build -t ruby_frontend .
+        # docker build -t ruby_backend .
+        # cd ./frontend
+        # docker build -t ruby_frontend .
         exit
         EOF
   
