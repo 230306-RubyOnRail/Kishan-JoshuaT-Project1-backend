@@ -1,17 +1,5 @@
 name: Ruby Project
 services:
-  db:
-    image: postgres
-    environment:
-        POSTGRES_PASSWORD: secretpassword
-        PGDATA: /var/lib/postgresql/data/pgdata
-    ports:
-        - "5432:5432"
-    volumes:
-        - pg_data:/var/lib/postgresql/data
-
-    networks:
-      - ruby_project
   web:
     image: ruby_backend
     environment:
