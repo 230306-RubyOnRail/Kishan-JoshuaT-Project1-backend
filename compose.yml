@@ -1,4 +1,4 @@
-name: Ruby Project
+name: ruby_project
 services:
   web:
     image: ruby_backend
