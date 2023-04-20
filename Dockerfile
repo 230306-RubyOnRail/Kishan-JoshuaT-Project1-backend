@@ -24,5 +24,7 @@ EXPOSE 3000
 # Set the environment variable
 ENV RAILS_ENV=development
 
+CMD ["rails", "db:create", "environment", "development"]
+
 # Run the command
 CMD ["bundle","exec","rails", "server", "-b", "0.0.0.0", "-p", "3000"]
