@@ -39,6 +39,7 @@ jobs:
         run: 
           rails test
 
+
   lint:
     runs-on: ubuntu-latest
     steps:
