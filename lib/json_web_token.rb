@@ -1,7 +1,7 @@
 # The secret must be a string
 require 'jwt'
 class JsonWebToken
-  @hmac_secret = Rails.application.credentials.dig(:secret_key_base)
+  @hmac_secret = "a9fbb79039302bf16199a407e7a51dfbcfffb6c6f6bfee0cf00bdbc21cee4fa870084ab1691d0baa33f550fb1b85b50b649ade8bc27bdc0fb1b78e61dd137015"
   def self.encode(payload)
     token = JWT.encode payload, @hmac_secret, 'HS256'
   end
@@ -10,9 +10,9 @@ class JsonWebToken
     # decoded_token = JWT.decode(token, @hmac_secret, true, { algorithm: 'HS256' })[0]
     JWT.decode(token, @hmac_secret, true, {algorithm: 'HS256'})
   rescue JWT::ExpiredSignature, JWT::VerificationError => e
-    raise ExceptionHandler::ExpiredSignature, e.message
+    raise JWT::ExpiredSignature, e.message
   rescue JWT::DecodeError, JWT::VerificationError => e
-    raise ExceptionHandler::DecodeError, e.message
+    raise JWT::DecodeError, e.message
   end
 end
 
