@@ -24,12 +24,20 @@ jobs:
         with:
           ruby-version: 3.2.1
           bundler-cache: true
+       
+        
       # Add or replace database setup steps here
       - name: Set up database schema
-        run: bundle exec rails db:schema:load
+        run: |
+          bundle install --jobs 4 --retry 3
+          bundle exec rails db:schema:load
       # Add or replace test runners here
       - name: Run tests 
-        run: bundle exec rake
+        env:
+          RAIL_ENV: test
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+        run: 
+          bundle exec rake
 
   lint:
     runs-on: ubuntu-latest
