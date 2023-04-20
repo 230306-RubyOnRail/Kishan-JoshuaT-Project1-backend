@@ -21,7 +21,7 @@ jobs:
         docker rmi -f $(docker images -a -q)
         docker pull joshet/ruby_backend
         docker run -d -p 3000:3000 -e DATABASE_PASSWORD=secretpassword -e DATABASE_HOST=ruby-on-rails-230306.c21epmfqzrpf.us-east-2.rds.amazonaws.com --network ruby_project joshet/ruby_backend
-        docker
+        screen -d -m
         exit
         EOF
 
