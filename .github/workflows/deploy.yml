@@ -12,6 +12,7 @@ jobs:
     - name: Build and push docker
       run: |
         docker build -t ${{ secrets.DOCKERNAME }}/ruby_backend .
+        docker login -p ${{ secrets.DOCKER_PASSWORD }} -u ${{ secrets.DOCKERUSERNAME }}
         docker push ${{ secrets.DOCKERNAME }}/ruby_backend   
     - name: Deploy Docker to EC2
       run: |
