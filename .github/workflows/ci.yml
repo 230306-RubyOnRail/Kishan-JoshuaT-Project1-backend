@@ -38,17 +38,14 @@ jobs:
           RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
         run: 
           rails test
-
-
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-      - name: Install Ruby and gems
-        uses: ruby/setup-ruby@55283cc23133118229fd3f97f9336ee23a179fcf # v1.146.0
+          
+      - name: Create Coverage Artifact
+        uses: actions/upload-artifact@v2
         with:
-          bundler-cache: true
+          name: code-coverage
+          path: coverage/
+
+
       # Add or replace any other lints here
       # - name: Security audit dependencies
       #  run: bin/bundler-audit --update
