@@ -200,7 +200,7 @@ GEM
     websocket-extensions (0.1.5)
     yard (0.9.28)
       webrick (~> 1.7.0)
-    zeitwerk (2.6.7)
+    zeitwerk (2.5.4)
 
 PLATFORMS
   x64-mingw-ucrt
@@ -221,6 +221,7 @@ DEPENDENCIES
   sqlite3 (~> 1.4)
   tzinfo-data
   yard
+  zeitwerk (~> 2.5.1)
 
 BUNDLED WITH
    2.4.9
