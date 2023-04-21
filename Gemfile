@@ -40,6 +40,7 @@ gem "rack-cors"
 gem 'rubocop'
 
 gem 'zeitwerk', '~> 2.5.1'
+gem "simplecov"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

@@ -22,8 +22,6 @@ R
 "config/environments/development.rb,e\5\e54c3d8d363f5b004526c7fcab8f8eb31da5a209
 E
 config/environment.rb,3\2\32cf963bc694248c5a463e17894503af06f93fdd
-7
-Gemfile,d\e\de3150c01c3a946a6168173c4116741379fe3579
 P
  app/models/application_record.rb,a\1\a1167d51039467f42565c78e85fc2e98815cec67
 K
