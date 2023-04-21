@@ -20,8 +20,6 @@ Q
 !config/environments/production.rb,4\a\4a310e0d78d1faa88d49084f8149abd3441b1f25
 R
 "config/environments/development.rb,e\5\e54c3d8d363f5b004526c7fcab8f8eb31da5a209
-C
-config/database.yml,2\c\2c912561029efc03ffae15b01b7337417d7a99bd
 E
 config/environment.rb,3\2\32cf963bc694248c5a463e17894503af06f93fdd
 7
