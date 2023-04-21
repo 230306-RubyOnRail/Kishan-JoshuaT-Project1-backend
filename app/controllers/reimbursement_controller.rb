@@ -96,7 +96,7 @@ class ReimbursementController < ApplicationController
   def reimburse_params
 
 
-    if params[:authorization][0][:account_type] == "manager"
+    if params[:authorization][0][:account_type] == "manager" && params[:reimbursement][:user_id] != nil
       params[:reimbursement][:user_id] = params[:reimbursement][:user_id]
     else
       params[:reimbursement][:user_id] = params[:authorization][0][:user_id]
