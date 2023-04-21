@@ -23,7 +23,7 @@ jobs:
         docker rm -f ruby_backend
         docker rmi ${{ secrets.DOCKERNAME }}/ruby_backend
         docker pull ${{ secrets.DOCKERNAME }}/ruby_backend
-        docker run -d -p 3000:3000 -e DATABASE_PASSWORD=secretpassword -e DATABASE_HOST=ruby-on-rails-230306.c21epmfqzrpf.us-east-2.rds.amazonaws.com --network ruby_project joshet/ruby_backend
+        docker run -d -p 3000:3000 --name ruby_backend -e DATABASE_PASSWORD=secretpassword -e DATABASE_HOST=ruby-on-rails-230306.c21epmfqzrpf.us-east-2.rds.amazonaws.com --network ruby_project joshet/ruby_backend
         screen -d -m
         exit
         EOF
