@@ -58,7 +58,7 @@ jobs:
           PG_PASSWORD: secretpassword
           RAILS_ENV: test
         run: |
-          bundle exec rake
+          bundle exec rails test
 
       - name: Create Coverage Artifact
         uses: actions/upload-artifact@v2
