@@ -37,7 +37,7 @@ jobs:
           RAIL_ENV: test
           RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
         run: 
-          rails test
+          bundle exec rails test
 
 
   lint:
